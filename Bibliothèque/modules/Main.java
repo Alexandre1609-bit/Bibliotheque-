@@ -1,26 +1,51 @@
-import java.time.LocalDate; // <-- IMPORTANT: A ajouter en haut de ton Main.java
+package modules;
+
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
+// On n'utilise pas LocalDate pour l'instant dans ce test, mais tu peux le laisser
 
 public class Main {
     public static void main(String[] args) {
 
+        System.out.println("--- DÉBUT DU PROGRAMME ---");
 
-        Book livreDune = new Book("Dune", "Frank Herbert", 5, 101);
-        User utilisateurJean = new User(1, "Jean Dupont", "jean@email.com", "motdepasse123");
+        try {
+
+            Connection maConnexion = DatabaseConnection.getConnection();
+
+            if (maConnexion == null) {
+                return;
+            }
+
+            //Requête
+            String sql = "SELECT * FROM books";
+
+            //Préparation
+            Statement monStatement = maConnexion.createStatement();
+
+            //Exécution et Récupération
+            ResultSet resultats = monStatement.executeQuery(sql);
+
+            System.out.println("\n📚 LISTE DES LIVRES (Depuis MySQL) :");
+
+            //Lecture (Boucle)
+            while (resultats.next()) {
+                String titre = resultats.getString("title");
+                String auteur = resultats.getString("author");
+                int stock = resultats.getInt("stock");
 
 
-        LocalDate dateEmprunt = LocalDate.now();
-        LocalDate dateRetourPrevue = dateEmprunt.plusDays(14);
-        LocalDate dateRetourReelle = null;
+                System.out.println("- " + titre + " (écrit par " + auteur + ") - Stock : " + stock);
+            }
 
 
-        Loan premierEmprunt = new Loan(1, dateEmprunt, dateRetourPrevue, dateRetourReelle, utilisateurJean, livreDune);
+            maConnexion.close();
 
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        System.out.println("L'utilisateur qui a emprunté le livre est : " + premierEmprunt.borrowUser.name);
-        System.out.println("Le titre du livre emprunté est : " + premierEmprunt.theBook.name);
-        System.out.println("Date d'emprunt : " + premierEmprunt.borrowDate);
-        System.out.println("Date de retour prévue : " + premierEmprunt.returnDate);
-
-
+        System.out.println("\n--- FIN DU PROGRAMME ---");
     }
 }
