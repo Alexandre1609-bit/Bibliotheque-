@@ -1,0 +1,15 @@
+.idea/
+*.iml
+*.iws
+
+out/
+target/
+build/
+*.class
+
+
+.DS_Store
+Thumbs.db
+
+
+src/modules/DatabaseConnection.java
