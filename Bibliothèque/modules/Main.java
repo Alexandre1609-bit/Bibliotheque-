@@ -1,51 +1,20 @@
 package modules;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-// On n'utilise pas LocalDate pour l'instant dans ce test, mais tu peux le laisser
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        System.out.println("--- DÉBUT DU PROGRAMME ---");
+        System.out.println("--- TEST DU DAO ---");
 
-        try {
+        BookDAO bookManager = new BookDAO();
 
-            Connection maConnexion = DatabaseConnection.getConnection();
+        List<Book> mesLivres = bookManager.findAll();
 
-            if (maConnexion == null) {
-                return;
-            }
+        System.out.println("J'ai trouvé " + mesLivres.size() + " livres dans la base");
 
-            //Requête
-            String sql = "SELECT * FROM books";
-
-            //Préparation
-            Statement monStatement = maConnexion.createStatement();
-
-            //Exécution et Récupération
-            ResultSet resultats = monStatement.executeQuery(sql);
-
-            System.out.println("\n📚 LISTE DES LIVRES (Depuis MySQL) :");
-
-            //Lecture (Boucle)
-            while (resultats.next()) {
-                String titre = resultats.getString("title");
-                String auteur = resultats.getString("author");
-                int stock = resultats.getInt("stock");
-
-
-                System.out.println("- " + titre + " (écrit par " + auteur + ") - Stock : " + stock);
-            }
-
-
-            maConnexion.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        for (Book livre : mesLivres) {
+            System.out.println("- [" + livre.book_id + "] " + livre.title + " (" + livre.stock + " en stock)");
         }
-
-        System.out.println("\n--- FIN DU PROGRAMME ---");
     }
 }
