@@ -26,10 +26,10 @@ public class BookDAO {
 
         try {
             Connection connect = DatabaseConnection.getConnection();
-            Statement vehicule = connect.createStatement();
+            Statement statement = connect.createStatement();
 
             String requete = "SELECT * FROM books";
-            ResultSet results = vehicule.executeQuery(requete);
+            ResultSet results = statement.executeQuery(requete);
 
             while (results.next()) {
                 String titre = results.getString("title");
