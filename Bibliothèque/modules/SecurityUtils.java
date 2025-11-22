@@ -35,8 +35,8 @@ public class SecurityUtils {
  * 2. On transforme le mot de passe (String) en tableau d'octets (byte[]) car l'algo ne traite que des nombres.
  * 3. On "digère" (hash) ces octets. Le résultat est illisible (binaire).
  * 4. On boucle sur chaque octet pour le convertir en Hexadécimal (Base 16) lisible :
- * - On applique un masque (0xff) pour gérer les nombres négatifs.
- * - On rajoute un '0' devant les chiffres uniques (ex: 'A' devient '0A') pour garder le format standard.
+ * On applique un masque (0xff) pour gérer les nombres négatifs.
+ * On rajoute un '0' devant les chiffres uniques (ex : 'A' devient '0A') pour garder le format standard.
  * * @param passwordToHash Le mot de passe en clair
  * @return L'empreinte de 64 caractères (le hash)
  */
