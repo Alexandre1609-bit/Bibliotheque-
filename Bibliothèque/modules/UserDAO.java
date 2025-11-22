@@ -13,24 +13,37 @@ import modules.SecurityUtils;
 public class UserDAO {
 
 
-    public void addUser(User user) {
+    public int addUser(User user) {
+        int generateId = -1; //Valeur par défaut, une erreur
+
         try {
             Connection connection = DatabaseConnection.getConnection();
             String sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
-            PreparedStatement pStatement = connection.prepareStatement(sql);
+
+            //Ajout du flag "RETURN_GENERATED_KEYS" pour surveiller l'ID !!!
+            PreparedStatement pStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             pStatement.setString(1, user.name);
             pStatement.setString(2, user.email);
             pStatement.setString(3, SecurityUtils.hashPassword(user.pswd));
             pStatement.executeUpdate();
 
-            System.out.println("Utilisateur ajouté");
+            //On récupère les clés !!
+            ResultSet rs = pStatement.getGeneratedKeys();
+
+            if (rs.next()) {
+                //La colonne n°1 du résultat est le nouvel ID
+                generateId = rs.getInt(1);
+            }
+
+            System.out.println("Utilisateur ajouté avec l'Id : " + generateId);
             pStatement.close();
             connection.close();
 
         } catch (Exception e) {
             e.printStackTrace();
         }
+        return generateId;
     }
 
     public void anonymizeUser(User userToAnonymize) {
