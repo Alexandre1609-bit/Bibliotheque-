@@ -1,0 +1,45 @@
+Notes :
+
+"@Repository" :
+On voit Spring Boot comme un chef de chantier géant. Au démarrage de l'application il scanne tous les fichiers.
+
+Sans annotation "@Repository" Spring voit la classe "BookDAO" (par ex.) et dit "C'est juste un fichier texte, j'ignore."
+
+Avec "@Repository" c'est comme si j'avais collé un post-it fluo sur ma classe et Spring se dit :
+"Ah, ça c'est une classe spécialisé dans les données (un DAO). Je dois mettre en mémoire la classe et la gérer."
+
+
+"DataSource" :
+Dans mon ancien code j'avais la classe "DatabaseConnection". C'était comme ci chaque DAO devait sortir,
+aller à la rivière, remplir un seau d'eau et revenir pour travailler. C'est lent et risqué.
+(Si la rivière change d'endroit, il faut prévenir tout le monde.)
+
+"DataSource" c'est comme l'eau courante. Spring Boot lit mon fichier "application.properties". Il a vu
+l'adresse de ma base de donnée et a construit une "tuyauterie centralisée" qui s'appelle "DataSource".
+
+Le constructeur :
+
+"private final DataSource dataSource; // "J'ai besoin d'eau"
+
+ public BookDAO(DataSource dataSource) { // "Donne-moi l'eau !"
+     this.dataSource = dataSource;
+ }"
+
+ C'est un contrat d'embauche. Avant dans le main, je devais faire new BookDAO(), je devais gérer moi-même
+ la création. Maintenant, avec Spring :
+ Spring voit le constructeur.
+ Il se dit "Tiens, pour créer un BookDAO, j'ai besoin d'un DataSource".
+ Spring en a un dans son fichier "application.properties".
+ Spring injecte automatiquement le DataSource dans le DAO au moment de la création.
+
+
+ En quoi tout ça c'est mieux ?
+
+ J'ai moins de code. J'ai supprimé "Databaseconnection". Je n'ai plus deboins d'ouvrir / fermer / gérer les erreurs de
+ drivers manuellement.
+
+ Si je veux tester mon DAO sans vraie base de données je peux lui "injecter" une fausse base de données (Mock) via le
+ constructeur. C'est impossible si le DAO crée sa propre connexion en dur.
+
+ Si je change le mot de passe de la base, je change juste le fichier texte "application.properties" et tout le monde
+ (UserDAO, BookDAO, LoanDAO) reçoit la maj instantanément !
