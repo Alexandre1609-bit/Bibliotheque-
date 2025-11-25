@@ -43,3 +43,11 @@ Le constructeur :
 
  Si je change le mot de passe de la base, je change juste le fichier texte "application.properties" et tout le monde
  (UserDAO, BookDAO, LoanDAO) reçoit la maj instantanément !
+
+
+
+ Sources :
+
+ -Controller :
+    https://www.baeldung.com/spring-controllers
+    https://www.baeldung.com/spring-request-response-body

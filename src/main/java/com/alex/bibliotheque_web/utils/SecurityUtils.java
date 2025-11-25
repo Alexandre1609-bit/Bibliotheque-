@@ -26,7 +26,7 @@ public class SecurityUtils {
     }
 }
 
-
+//Ne pas oublier d'ajouter un salt /!\
 
 /**
  * Hash un mot de passe en utilisant l'algorithme SHA-256.
