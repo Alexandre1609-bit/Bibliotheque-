@@ -25,25 +25,29 @@ public class UserDAO {
     }
 
     public int addUser(User user) {
-        int generateId = -1; //Valeur par défaut, une erreur
+        int generateId = -1;
+
+        // 1. Préparation de la cuisine (Sel + Hash)
+        String salt = SecurityUtils.generateSalt();
+        String hash = SecurityUtils.hashPassword(user.getPswd(), salt); // On utilise le sel généré
 
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
 
-            //Ajout du flag "RETURN_GENERATED_KEYS" pour surveiller l'ID !!!
+            // CORRECTION 1 : 4 colonnes = 4 points d'interrogation
+            String sql = "INSERT INTO users (name, email, password, salt) VALUES (?, ?, ?, ?)";
+
             PreparedStatement pStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
             pStatement.setString(1, user.getName());
             pStatement.setString(2, user.getEmail());
-            pStatement.setString(3, SecurityUtils.hashPassword(user.getPswd()));
+            pStatement.setString(3, hash); // OPTIMISATION : On utilise la variable calculée au début
+            pStatement.setString(4, salt); // CORRECTION 2 : On n'oublie pas de sauvegarder le sel !
+
             pStatement.executeUpdate();
 
-            //On récupère les clés !!
             ResultSet rs = pStatement.getGeneratedKeys();
-
             if (rs.next()) {
-                //La colonne n°1 du résultat est le nouvel ID
                 generateId = rs.getInt(1);
             }
 
@@ -60,7 +64,7 @@ public class UserDAO {
     public void anonymizeUser(User userToAnonymize) {
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "UPDATE users SET name = ?, email = ?, password = ? WHERE user_id = ?";
+            String sql = "UPDATE users SET name = ?, email = ?, password = ?, salt = NULL WHERE user_id = ?";
             PreparedStatement pStatement = connection.prepareStatement(sql);
 
             pStatement.setString(1, "Anonyme");
@@ -79,33 +83,54 @@ public class UserDAO {
         }
     }
 
-    public User connect (String email, String password) {
-        String securePswd = SecurityUtils.hashPassword(password);
+    public User connect(String email, String passwordInput) {
+        // On ne peut pas hacher tout de suite ici, car on n'a pas encore le sel !!!!!
 
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "SELECT * FROM users WHERE email = ? AND password = ?";
-            PreparedStatement pStatement = connection.prepareStatement(sql);
 
+            // On cherche l'utilisateur SEULEMENT avec l'email, plus l'email Et le mdp
+            String sql = "SELECT * FROM users WHERE email = ?";
+
+            PreparedStatement pStatement = connection.prepareStatement(sql);
             pStatement.setString(1, email);
-            pStatement.setString(2, securePswd);
+            //Retrait du setString(2) car on ne vérifie pas le mdp tout de suite
 
             ResultSet result = pStatement.executeQuery();
 
-
             if (result.next()) {
-                int idTrouve = result.getInt("user_id");
-                String nomTrouve = result.getString("name");
-                String emailTrouve = result.getString("email");
-                String mdpTrouve = result.getString("password");
+                // L'utilisateur existe ! Maintenant vérification du mot de passe.
 
-                pStatement.close();
-                connection.close();
+                //On récupère le sel et le mot de passe (hash) stockés en base
+                String storedSalt = result.getString("salt");
+                String storedHash = result.getString("password");
 
-                return new User(idTrouve, nomTrouve, emailTrouve, mdpTrouve);
+                //On calcule le hash de ce que l'utilisateur vient de taper + le sel trouvé
+                String calculatedHash = SecurityUtils.hashPassword(passwordInput, storedSalt);
+
+                // 4. On compare
+                if (calculatedHash.equals(storedHash)) {
+                    //On récupère le reste des infos
+                    int idTrouve = result.getInt("user_id");
+                    String nomTrouve = result.getString("name");
+                    String emailTrouve = result.getString("email");
+
+                    pStatement.close();
+                    connection.close();
+
+                    return new User(idTrouve, nomTrouve, emailTrouve, storedHash);
+                } else {
+                    // Le hash calculé ne correspond pas au hash stocké :
+                    System.out.println("Mot de passe incorrect");
+                    pStatement.close();
+                    connection.close();
+                    return null;
+                }
 
             } else {
-                System.out.println("Identifiants incorrects");
+                System.out.println("Email inconnu");
+                pStatement.close();
+                connection.close();
                 return null;
             }
 

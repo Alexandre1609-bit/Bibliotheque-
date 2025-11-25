@@ -1,13 +1,32 @@
 package com.alex.bibliotheque_web.utils;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.security.SecureRandom;
 
 
 public class SecurityUtils {
 
-    public static String hashPassword(String passwordToHash) {
+
+    public static String generateSalt() {
+        SecureRandom random = new SecureRandom();
+        byte[] saltBytes = new byte[16];
+        random.nextBytes(saltBytes);
+
+        StringBuilder hexStr = new StringBuilder(2 * saltBytes.length);
+        for (int i = 0; i < saltBytes.length; i++) {
+            String hex = Integer.toHexString(0xff & saltBytes[i]);
+            if(hex.length() == 1) {
+                hexStr.append('0');
+            }
+            hexStr.append(hex);
+        }
+        return hexStr.toString();
+    }
+
+    public static String hashPassword(String passwordToHash, String salt) {
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            digest.update((salt.getBytes(StandardCharsets.UTF_8)));
             byte[] encodeHash = digest.digest(passwordToHash.getBytes(StandardCharsets.UTF_8));
 
             //Il faut convertir les bytes en hexadécimal
@@ -26,7 +45,7 @@ public class SecurityUtils {
     }
 }
 
-//Ne pas oublier d'ajouter un salt /!\
+
 
 /**
  * Hash un mot de passe en utilisant l'algorithme SHA-256.
@@ -39,4 +58,6 @@ public class SecurityUtils {
  * On rajoute un '0' devant les chiffres uniques (ex : 'A' devient '0A') pour garder le format standard.
  * * @param passwordToHash Le mot de passe en clair
  * @return L'empreinte de 64 caractères (le hash)
+ *
+ * ajout du sel.
  */
