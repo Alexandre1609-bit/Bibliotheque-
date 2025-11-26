@@ -1,18 +1,27 @@
-<HTML>
-<HEAD>
-<TITLE>Bibliothèque pour tous</TITLE>
-</HEAD>
+<!DOCTYPE html> <html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion - Bibliothèque</title>
+
+    <script src="auth.js" defer></script>
+</head>
 <body>
 
-    <h1>Connectez-vous</h1>
+<h1>Connectez-vous</h1>
 
-    <form action="/traitement-connexion" method="post">
-        <label for="pseudonyme">Nom d'utilisateur :</label>
-        <input type="text" id="pseudonyme" name="pseudonyme"><br>
-        <label for="mdp">Mot de passe :</label>
-        <input type="text" id="mdp" name="mdp"><br>
-        <input type="submit" value="Se connecter">
-    </form>
+<form id="loginForm">
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" required><br><br>
+
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" required><br><br>
+
+    <button id="sbButton" type="submit">Se connecter</button>
+</form>
+
+<p id="messageErreur" style="color: red;"></p>
 
 </body>
-</HTML>
+</html>
