@@ -14,6 +14,8 @@ public class Book {
         this.book_id = book_id;
     }
 
+    public Book() {}
+
     public String getTitle() {
         return title;
     }

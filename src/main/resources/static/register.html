@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <TITLE>inscription</TITLE>
+
+    <script src="register.js" defer></script>
+</head>
+
+
+<body>
+<h1>Inscrivez-vous</h1>
+
+<form id="registerForm">
+
+    <label for="prenom">prénom :</label>
+    <input type="text" id="prenom" required><br><br>
+
+    <label for="email">email :</label>
+    <input type="text" id="email" required><br><br>
+
+    <label for="password">mot de passe :</label>
+    <input type="password" id="password" required>
+
+    <button id="registerButton" type="submit">S'enregistrer</button>
+</form>
+
+<p id="messageErreur" style="color: red;"></p>
+
+
+</body>
+</html>

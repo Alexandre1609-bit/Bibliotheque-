@@ -2,20 +2,23 @@ package com.alex.bibliotheque_web.model;
 
 public class User{
 
-    private int id;
+    private Integer id;
     private String name;
     private String email;
     private String pswd;
 
 
-    public User(int id, String name, String email, String pswd) {
+    public User(Integer id, String name, String email, String pswd) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.pswd = pswd;
     }
+    public User() {
+        this.id = 0;
+    }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -31,7 +34,7 @@ public class User{
         return pswd;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

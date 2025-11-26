@@ -41,8 +41,8 @@ public class UserDAO {
 
             pStatement.setString(1, user.getName());
             pStatement.setString(2, user.getEmail());
-            pStatement.setString(3, hash); // OPTIMISATION : On utilise la variable calculée au début
-            pStatement.setString(4, salt); // CORRECTION 2 : On n'oublie pas de sauvegarder le sel !
+            pStatement.setString(3, hash);
+            pStatement.setString(4, salt);
 
             pStatement.executeUpdate();
 
@@ -51,7 +51,7 @@ public class UserDAO {
                 generateId = rs.getInt(1);
             }
 
-            System.out.println("Utilisateur ajouté avec l'Id : " + generateId);
+            System.out.println("Compté crée avec succès");
             pStatement.close();
             connection.close();
 

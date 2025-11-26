@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(reponse => {
 
-            console.log("Réponse brute :", reponse);
+            console.log("Réponse :", reponse);
             return reponse.json();
         })
         .then(user => {
