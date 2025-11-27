@@ -14,11 +14,21 @@ fetch('http://localhost:8080/livres')
         //Le constructeur : Je boucle sur chaque livre
         livres.forEach(livre => {
 
-            //Création
             const ligne = document.createElement("li");
-            //On prend les titres des livres
-            ligne.innerText = livre.title;
-            //On ajoute le tout à ma liste
+
+            const texte = document.createElement("span");
+            texte.innerText = livre.title + " ";
+
+            const image = document.createElement("img");
+            image.src = livre.img_link;
+
+            image.style.height = "50px";
+            image.style.marginLeft = "10px";
+            image.style.verticalAlign = "middle";
+
+            ligne.appendChild(texte);
+            ligne.appendChild(image);
+
             maListe.appendChild(ligne);
 
             })
