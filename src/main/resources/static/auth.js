@@ -32,6 +32,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (user) {
                 console.log("Bienvenue " + user.name);
                 alert("Connexion réussie !");
+                localStorage.setItem('user', JSON.stringify(user)); //On garde en mémoire les infos
+                window.location.href = "index.html"; //On redirige vers l'accueil
+
             } else {
                 console.log("Erreur : Utilisateur non trouvé");
                 alert("Email ou mot de passe incorrect");

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="style.css">
-
+    <script src="navbar.js" defer></script>
 
     <TITLE>Bibliothèque pour tous</TITLE>
 </head>
@@ -14,13 +14,17 @@
     <input type="text" id="bdr" placeholder="Tapez votre recherche" value title="Tapez votre recherche">
         <div id="navbar">
             <nav>
-                <a href="">Accueil</a>
+                <span id="welcomeMessage" style="font-weight: bold; margin-left: 10px;"></span>
+                <a href="index.html">Accueil</a>
                 <a href="browse.html">Parcourir</a>
                 <a href="">Nouveautés</a>
-                <a href="login.html">Connexion</a>
-                <a href="register.html">S'inscrire</a>
+                <a href="login.html" id="loginBtn">Se connecter</a>
+                <a href="#" id="logoutBtn" style="display: none;">Se deconnecter</a>
+                <a href="register.html" id="signinBtn">S'inscrire</a>
             </nav>
         </div>
+
+
 
 </body>
 </HTML>
