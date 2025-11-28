@@ -48,8 +48,9 @@ public class BookDAO {
                 int stock = results.getInt("stock");
                 int id = results.getInt("books_id");
                 String img = results.getString("img_link");
+                String summary = results.getString("summary");
 
-                Book b = new Book(titre, auteur, stock, id, img);
+                Book b = new Book(titre, auteur, stock, id, img, summary);
 
                 books.add(b);
             }
@@ -67,7 +68,7 @@ public class BookDAO {
 
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "INSERT INTO books (title, author, stock, img_link) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO books (title, author, stock, img_link, summary) VALUES (?, ?, ?, ?, ?)";
 
             PreparedStatement pStatement = connection.prepareStatement(sql);
 
@@ -78,6 +79,7 @@ public class BookDAO {
             pStatement.setString(2, bookToAdd.getAuthor());
             pStatement.setInt(3, bookToAdd.getStock());
             pStatement.setString(4, bookToAdd.getImg_link());
+            pStatement.setString(5, bookToAdd.getSummary());
 
             pStatement.executeUpdate();
             System.out.println("Livre ajouté avec succès");
@@ -94,7 +96,7 @@ public class BookDAO {
 
         try {
             Connection connection = dataSource.getConnection();
-            String sql = "UPDATE books SET title = ?, author = ?, stock = ?, img_link = ? WHERE books_id = ?";
+            String sql = "UPDATE books SET title = ?, author = ?, stock = ?, img_link = ?, summary = ? WHERE books_id = ?";
 
             PreparedStatement pStatement = connection.prepareStatement(sql);
 
@@ -102,7 +104,8 @@ public class BookDAO {
             pStatement.setString(2, updateBook.getAuthor());
             pStatement.setInt(3, updateBook.getStock());
             pStatement.setString(4, updateBook.getImg_link());
-            pStatement.setInt(5, updateBook.getBook_id());
+            pStatement.setString(5, updateBook.getSummary());
+            pStatement.setInt(6, updateBook.getBook_id());
 
             pStatement.executeUpdate();
             System.out.println("Livre modifié avec succès");

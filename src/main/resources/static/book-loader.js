@@ -38,13 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     const modalTitle = document.getElementById("modalTitle");
                     const modalAuthor = document.getElementById("modalAuthor");
                     const modalStock = document.getElementById("modalStock");
+                    const modalSummary = document.getElementById("modalSummary");
                     const borrowBtn = document.getElementById("modalBorrowBtn");
 
                     //Remplissage de la modale avec le livre cliqué
                     modalImg.src = livre.img_link;
                     modalTitle.innerText = livre.title;
-                    modalAuthor.innerText = "Auteur : " + livre.author;
-                    modalStock.innerText = "Stock : " + livre.stock;
+                    modalSummary.innerText = livre.summary;
+                    modalAuthor.innerText = livre.author;
+                    modalStock.innerText = livre.stock;
 
                     //Affichage de la fenêtre
                     if (modalOvrl) {
@@ -101,5 +103,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
             }); // Fin du forEach
         }); // Fin du fetch
-    //Ajouter la gestion du bouton de fermeture fenêtre !!
-});
+
+    //GESTION DE LA FERMETURE
+        const modalOvrl = document.getElementById('modalOverlay');
+        const closeBtn = document.getElementById("closeModal");
+
+        //Fermer avec la croix
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                modalOvrl.style.display = 'none';
+            });
+        }
+
+        //Fermer en cliquant à côté
+        if (modalOvrl) {
+            modalOvrl.addEventListener('click', (e) => {
+                if (e.target === modalOvrl) {
+                    modalOvrl.style.display = 'none';
+                }
+            });
+        }
+
+        //BOUTON ACCUEIL
+        const homeBtn = document.getElementById("homeBtn");
+        if (homeBtn) {
+            homeBtn.addEventListener('click', () => {
+                window.location.href = "index.html";
+            });
+        }
+
+    });
