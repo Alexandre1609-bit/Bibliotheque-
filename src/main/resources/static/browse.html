@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Parcourir les livres</title>
-
+    <link rel="stylesheet" href="style.css">
     <script src="book-loader.js" defer></script>
 
 </head>
@@ -20,6 +20,23 @@
 <div>
     <ul id="bookList">
     </ul>
+</div>
+
+
+<div id="modalOverlay" class="hidden"> <div class="modal-box">
+        
+        <span id="closeModal" style="cursor:pointer; float:right; font-size:20px;">&times;</span>
+
+        <h3 id="modalTitle"></h3>
+        
+        <img id="modalImage" src="" alt="Couverture">
+        
+        <p>Auteur : <span id="modalAuthor"></span></p>
+        <p>Stock : <span id="modalStock"></span></p>
+
+        <button id="modalBorrowBtn">Confirmer l'emprunt</button>
+    </div>
+
 </div>
 
 </body>
