@@ -1,5 +1,7 @@
 package com.alex.bibliotheque_web.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.time.LocalDate;
 
 
@@ -7,8 +9,11 @@ import java.time.LocalDate;
 public class Loan {
 
     private Integer id;
+    @JsonFormat(pattern = "yyyy-MM-dd") //Précision du format pour éviter les confusions : java.lang.NullPointerException: Cannot invoke "java.time.LocalDate.getYear()" because "date" is null
     private LocalDate borrowDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate returnDate;
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private LocalDate trueReturnDate;
     private User borrowUser;
     private Book theBook;
