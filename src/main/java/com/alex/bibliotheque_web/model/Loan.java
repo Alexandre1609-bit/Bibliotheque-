@@ -6,14 +6,14 @@ import java.time.LocalDate;
 
 public class Loan {
 
-    private int id;
+    private Integer id;
     private LocalDate borrowDate;
     private LocalDate returnDate;
     private LocalDate trueReturnDate;
     private User borrowUser;
     private Book theBook;
 
-    public Loan(int id, LocalDate borrowDate, User borrowUser, Book theBook) {
+    public Loan(Integer id, LocalDate borrowDate, User borrowUser, Book theBook) {
         this.id = id;
         this.borrowDate = borrowDate;
         this.returnDate = borrowDate.plusDays(7);
@@ -25,7 +25,7 @@ public class Loan {
     //Overload (Surcharge) Avoir plusieurs méthodes (ou constructeurs) avec le même nom dans la même classe !
     //Mais avec des paramètres différents !! Parfait dans ce cas.
 
-    public Loan(int id, LocalDate borrowDate, LocalDate returnDate, LocalDate trueReturnDate, User borrowUser, Book theBook) {
+    public Loan(Integer id, LocalDate borrowDate, LocalDate returnDate, LocalDate trueReturnDate, User borrowUser, Book theBook) {
         this.id = id;
         this.borrowDate = borrowDate;
         this.returnDate = returnDate;
@@ -36,11 +36,11 @@ public class Loan {
 
     public  Loan() {}
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

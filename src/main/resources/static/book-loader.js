@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (userData) { //S'il y a un utilisateur connecté !
                         const dataToSend = {
-                            borrowDate: new Date(),
+                            borrowDate: new Date().toISOString().split('T')[0], //Conflit avec l'ancien format j'ai du remplacer !!
                             borrowUser: {
                                 id: userData.id
                             },
@@ -70,6 +70,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         //action du bouton (onclick écrase l'ancien clic pour éviter les doublons)
                         borrowBtn.onclick = () => {
+                        console.log("Envoi de l'emprunt :", dataToSend); //pour vérifier
+
                             fetch('http://localhost:8080/emprunts', {
                                     method: 'POST',
                                     headers: {
