@@ -46,7 +46,7 @@ Installation et Lancement
         title VARCHAR(100),
         author VARCHAR(100),
         stock INT,
-        image_url VARCHAR(255),
+        image_link VARCHAR(255),
         PRIMARY KEY (books_id)
     );
 
