@@ -1,6 +1,7 @@
 package com.alex.bibliotheque_web.dao;
 
 import com.alex.bibliotheque_web.model.Book;
+import com.alex.bibliotheque_web.model.Loan;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
@@ -139,5 +140,25 @@ public class BookDAO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void stockUpdate(Integer bookId, int amoutChange) {
+
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "UPDATE books SET stock = stock + ? WHERE books_id = ?";
+
+            PreparedStatement pStatement = connection.prepareStatement(sql);
+            pStatement.setInt(1, amoutChange);
+            pStatement.setInt(2, bookId);
+            pStatement.executeUpdate();
+
+            pStatement.close();
+            connection.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 }

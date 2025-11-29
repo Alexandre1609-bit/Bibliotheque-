@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                 .then(reponse => {
                                     if (reponse.ok) {
                                         alert("Livre emprunté avec succès !");
+                                        window.location.reload();
                                         //fermer la modale
                                         modalOvrl.style.display = 'none';
                                     } else {

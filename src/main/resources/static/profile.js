@@ -69,7 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
                             method: 'POST',
                             headers: { 'Content-Type': 'application/json' },
                             // On envoie juste l'ID de l'emprunt
-                            body: JSON.stringify({ id: loan.id })
+                            body: JSON.stringify({ id: loan.id,
+                                                   theBook: { book_id: loan.theBook.book_id }})
                         })
                         .then(rep => {
                             if (rep.ok) {
