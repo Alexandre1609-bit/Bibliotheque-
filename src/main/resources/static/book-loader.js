@@ -22,11 +22,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 texte.innerText = livre.title + " ";
                 image.src = livre.img_link;
 
-                //Style de l'image
-                image.style.height = "50px";
-                image.style.marginLeft = "10px";
-                image.style.verticalAlign = "middle";
+
                 image.style.cursor = "pointer";
+
 
                 //évènement click pour la modale
                 image.addEventListener('click', (e) => {
@@ -124,14 +122,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.target === modalOvrl) {
                     modalOvrl.style.display = 'none';
                 }
-            });
-        }
-
-        //BOUTON ACCUEIL
-        const homeBtn = document.getElementById("homeBtn");
-        if (homeBtn) {
-            homeBtn.addEventListener('click', () => {
-                window.location.href = "index.html";
             });
         }
 
