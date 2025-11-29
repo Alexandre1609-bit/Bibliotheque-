@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="profile.js" defer></script>
+    <TITLE>Mon profile</TITLE>
+</head>
+
+<body>
+
+<button id="loanBtn">Voir mes emprunts</button>
+
+<div id="loanModalOvrl" class="hidden">
+
+    <div class="modal-boxLoan">
+        <span id="closeModal" style="cursor:pointer; float:right; font-size:20px;">&times;</span>
+
+        <table>
+            <caption>Liste des emprunts</caption>
+            <thead>
+            <tr>
+                <th scope="col">Livre</th>
+                <th scope="col">Date de retour</th>
+                <th scope="col">Action</th> </tr>
+            </thead>
+            <tbody id="tbodyLoanList">
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+</body>
+
+
+
+
+</html>

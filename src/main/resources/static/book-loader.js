@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                         //action du bouton (onclick écrase l'ancien clic pour éviter les doublons)
                         borrowBtn.onclick = () => {
-                        console.log("Envoi de l'emprunt :", dataToSend); //pour vérifier
+
 
                             fetch('http://localhost:8080/emprunts', {
                                     method: 'POST',

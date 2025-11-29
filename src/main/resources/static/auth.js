@@ -24,19 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
     })
     .then(reponse => {
 
-            console.log("Réponse :", reponse);
+
             return reponse.json();
         })
         .then(user => {
 
             if (user) {
-                console.log("Bienvenue " + user.name);
+
                 alert("Connexion réussie !");
                 localStorage.setItem('user', JSON.stringify(user)); //On garde en mémoire les infos
                 window.location.href = "index.html"; //On redirige vers l'accueil
 
             } else {
-                console.log("Erreur : Utilisateur non trouvé");
+
                 alert("Email ou mot de passe incorrect");
             }
         })

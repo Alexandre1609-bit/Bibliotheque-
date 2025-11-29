@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const registerForm = document.getElementById('registerForm');
 
-    registerForm.addEventListener('submit', (event) => { // Attention ici pas document.aDD.. mais registerForm !!
+    registerForm.addEventListener('submit', (event) => { // Attention ici pas document.add.. mais registerForm !!
 
         event.preventDefault();
 
@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
             console.log("Réponse brute : ", reponse);
             return reponse.json();
         })
-        .then(idRecu => { //Méfiance, toujours vérifier ce que le DAO retour ! Mon addUser retourne un INT
-            console.log("ID reçu du serveur :", idRecu);
+        .then(idRecu => {
+
 
             if (idRecu > 0) {
                 alert("Compte créé avec succès ! ID : " + idRecu);
