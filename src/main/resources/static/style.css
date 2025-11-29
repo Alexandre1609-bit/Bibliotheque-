@@ -1,7 +1,3 @@
-#logoutBtn {
-    display:none;
-
-}
 
 #signinBtn {
     display:none;
@@ -56,4 +52,101 @@
     padding: 10px 20px;
     text-decoration: none;
     border-radius: 5px;
+}
+
+#loanTable{
+    border-radius: 25px;
+    border: 2px solid #bfd18e;
+    overflow: hidden;
+    table-layout: auto;
+    width: auto;
+    border-collapse: separate;
+    border-spacing: 0px;
+}
+
+td, th{
+    overflow-wrap: break-word;
+    padding: 15px 30px;
+    font-family: "Georgia", serif;
+    }
+
+tr:first-child th:first-child {
+    border-top-left-radius: 25px;
+}
+
+tr:first-child th:last-child {
+    border-top-right-radius: 25px;
+}
+
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 25px;
+}
+
+
+tr:last-child td:last-child {
+
+    border-bottom-right-radius: 25px ;
+}
+
+
+#loanTable tr:nth-child(even){
+    background-color: #b5ccab;
+}
+
+#loanTable tr:nth-child(odd){
+    background-color: #d9e3d5;
+}
+
+/*Le Conteneur global */
+#navbar-container {
+    position: sticky; /* Ou 'fixed' !! */
+    top: 0;
+    width: 100%;
+    z-index: 1000;
+}
+
+/*La Barre elle-même */
+#balNav {
+
+    display: flex;
+    align-items: center; /
+    gap: 20px; /* Espace entre les liens*/
+
+    /* DESIGN */
+    background-color: #b5ccab;
+    padding: 10px 20px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* ombre */
+    border-radius: 0 0 15px 15px;
+
+    font-family: "Georgia", serif;
+    transition: background-color 0.3s;
+}
+
+/*Les Liens  */
+#balNav a {
+    text-decoration: none; /* Enlève le soulignement */
+    color: #2c3e50;
+    padding: 8px 15px;
+    border-radius: 10px; /* Bords ronds au survol */
+    transition: all 0.2s; /* Animation */
+}
+
+/* Hover */
+#balNav a:hover {
+    background-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-2px); /* Le bouton monte un tout petit peu :o/
+}
+
+/*Le message de Bienvenue */
+#welcomeMessage {
+    margin-right: auto;
+    font-weight: bold;
+    color: #1a252f;
+}
+
+#logoutBtn {
+    display:none;
+    margin-left:auto
+
 }

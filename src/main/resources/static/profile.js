@@ -99,4 +99,12 @@ document.addEventListener('DOMContentLoaded', () => {
         })
         .catch(error => console.error("Erreur fetch:", error));
 
+         //BOUTON ACCUEIL
+                const homeBtn = document.getElementById("homeBtn");
+                if (homeBtn) {
+                    homeBtn.addEventListener('click', () => {
+                        window.location.href = "index.html";
+                    });
+                }
+
 });

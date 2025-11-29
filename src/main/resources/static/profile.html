@@ -6,32 +6,28 @@
 
     <link rel="stylesheet" href="style.css">
     <script src="profile.js" defer></script>
+    <script src="navbar.js" defer></script>
     <TITLE>Mon profile</TITLE>
 </head>
 
 <body>
+<div id="navbar-container"></div>
 
-<button id="loanBtn">Voir mes emprunts</button>
 
-<div id="loanModalOvrl" class="hidden">
+<table id="loanTable">
+    <caption style="font-size: 20px; text-align: center;">Liste des emprunts</caption>
+    <thead>
+    <tr>
+        <th scope="col">Livre</th>
+        <th scope="col">Date de retour</th>
+        <th scope="col">Action</th> </tr>
+    </thead>
+    <tbody id="tbodyLoanList">
+    </tbody>
+</table>
 
-    <div class="modal-boxLoan">
-        <span id="closeModal" style="cursor:pointer; float:right; font-size:20px;">&times;</span>
 
-        <table>
-            <caption>Liste des emprunts</caption>
-            <thead>
-            <tr>
-                <th scope="col">Livre</th>
-                <th scope="col">Date de retour</th>
-                <th scope="col">Action</th> </tr>
-            </thead>
-            <tbody id="tbodyLoanList">
-            </tbody>
-        </table>
-    </div>
-
-</div>
+<button id="homeBtn">Accueil</button>
 
 </body>
 
