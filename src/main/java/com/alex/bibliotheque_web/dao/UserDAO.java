@@ -27,14 +27,14 @@ public class UserDAO {
     public int addUser(User user) {
         int generateId = -1;
 
-        // 1. Préparation de la cuisine (Sel + Hash)
+
         String salt = SecurityUtils.generateSalt();
         String hash = SecurityUtils.hashPassword(user.getPswd(), salt); // On utilise le sel généré
 
         try {
             Connection connection = dataSource.getConnection();
 
-            // CORRECTION 1 : 4 colonnes = 4 points d'interrogation
+
             String sql = "INSERT INTO users (name, email, password, salt) VALUES (?, ?, ?, ?)";
 
             PreparedStatement pStatement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
