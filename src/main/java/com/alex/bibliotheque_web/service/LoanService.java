@@ -6,6 +6,7 @@ import com.alex.bibliotheque_web.model.Loan;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Service
 public class LoanService {
@@ -46,6 +47,16 @@ public class LoanService {
         } else {
             throw new RuntimeException("Impossible d'emprunter : Le stock est vide !");
         }
+    }
+
+    public void returnLoan(Loan loan) {
+        loanDAO.returnBook(loan);
+        Integer bookId = loan.getTheBook().getBook_id();
+        bookDAO.stockUpdate(bookId, 1);
+    }
+
+    public List<Loan> findLoansByUserId(int userId) {
+        return loanDAO.findLoansByUserId(userId);
     }
 }
 

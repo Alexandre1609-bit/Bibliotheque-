@@ -11,15 +11,10 @@ import java.util.List;
 
 @RestController
 public class LoanController {
-
-    private final LoanDAO loanDAO;
-    private final BookDAO bookDAO;
     private final LoanService loanService;
 
 
-    public LoanController (LoanDAO loanDAO, BookDAO bookDAO, LoanService loanService) {
-        this.loanDAO = loanDAO;
-        this.bookDAO = bookDAO;
+    public LoanController (LoanService loanService) {
         this.loanService = loanService;
     }
 
@@ -30,14 +25,11 @@ public class LoanController {
 
     @PostMapping("/retours")
     public void returnBook(@RequestBody Loan loan) {
-        loanDAO.returnBook(loan);
-
-        Integer bookId = loan.getTheBook().getBook_id();
-        bookDAO.stockUpdate(bookId, 1);
+        loanService.returnLoan(loan);
     }
 
     @GetMapping("/emprunts")
     public List<Loan> getLoanByUser(@RequestParam int userId) {
-        return loanDAO.findLoansByUserId(userId);
+        return loanService.findLoansByUserId(userId);
     }
 }
