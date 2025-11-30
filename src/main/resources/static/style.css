@@ -17,8 +17,6 @@
         padding: 15px;
         overflow: hidden;
         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* ombre */
-
-
     }
 
     #bookList li img {
@@ -27,7 +25,6 @@
         object-fit: cover;
         display: block;
         border-radius: 10px;
-
     }
 
 /*Gestion de la modale qui affiche les infos des livres*/
@@ -84,7 +81,7 @@
         overflow-wrap: break-word;
         padding: 15px 30px;
         font-family: "Georgia", serif;
-        }
+    }
 
     tr:first-child th:first-child {
         border-top-left-radius: 25px;
@@ -118,6 +115,7 @@
         top: 0;
         width: 100%;
         z-index: 1;
+        margin-bottom: 25px;
     }
 
     /*La Barre elle-même */
@@ -166,6 +164,35 @@
 
     #signinBtn {
         display:none;
-        }
+    }
 
+//* 1. La Barre de Recherche (LE PARENT) */
+     #rb {
+         position: relative;
+         text-align: center;
+     }
 
+     /* 2. Le Champ Input lui-même*/
+     #bdr {
+         display: block;
+         margin: 0 auto;
+         padding: 10px 20px;
+         padding-left: 20px;
+         border-radius: 50px;
+         border: 1px solid #ccc;
+         box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* comme la navBar :) */
+         background-color: #FFFFF0;
+         position: relative;
+         font-family: "Georgia", serif;
+         font-size: 12px;
+         transition: all 0.3s;
+         width: 300px;
+         max-width: 90%;
+     }
+
+     /* 3. ":focus" permet de cibler un élément lorsqu'il reçoit le focus (fait au clavier ou à la souris) !  */
+     #bdr:focus {
+         outline: none;
+         border-color: #bfd18e;
+         box-shadow: 0 0 0 3px rgba(191, 209, 142, 0.5);
+     }
