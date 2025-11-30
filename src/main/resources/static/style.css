@@ -1,185 +1,171 @@
-
-#signinBtn {
-    display:none;
+/*Page "parcourir", agit sur la liste de livre */
+    #bookList {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        gap: 20px;
     }
 
-#modalOverlay {
-    position: fixed;
-    display: none;
-    align-items: center;
-    justify-content:center;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* Fond noir avec une légère opacité */
-    z-index: 2; 
-    cursor: pointer; 
-}
-
-.modal-box {
-    position:fixed;
-    background-color: white;
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    
-}
-
-#modalImage {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 40%;
-    padding: 10px;
-    
-}
+    #bookList li {
+        background-color: #FFFFF0;
+        border: 1px solid #F5F5F5;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: column;
+        padding: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* ombre */
 
 
-#homeBtn {
-    position: fixed; /* Reste collé à l'écran */
-    top: 20px;
-    right: 20px;
-    z-index: 1000; /*passe au-dessus des images */
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-}
-
-#loanTable{
-    border-radius: 25px;
-    border: 2px solid #bfd18e;
-    overflow: hidden;
-    table-layout: auto;
-    width: auto;
-    border-collapse: separate;
-    border-spacing: 0px;
-}
-
-td, th{
-    overflow-wrap: break-word;
-    padding: 15px 30px;
-    font-family: "Georgia", serif;
     }
 
-tr:first-child th:first-child {
-    border-top-left-radius: 25px;
-}
+    #bookList li img {
+        width: 100%;
+        height: 300px ;
+        object-fit: cover;
+        display: block;
+        border-radius: 10px;
 
-tr:first-child th:last-child {
-    border-top-right-radius: 25px;
-}
+    }
 
+/*Gestion de la modale qui affiche les infos des livres*/
+    #modalOverlay {
+        position: fixed;
+        display: none;
+        align-items: center;
+        justify-content:center;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5); /* Fond noir avec une légère opacité */
+        z-index: 5;
+        cursor: pointer;
+    }
 
-tr:last-child td:first-child {
-    border-bottom-left-radius: 25px;
-}
+    .modal-box {
+        position:fixed;
+        background-color: white;
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
 
+    }
 
-tr:last-child td:last-child {
+    #modalImage {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 40%;
+        padding: 10px;
 
-    border-bottom-right-radius: 25px ;
-}
+    }
 
+/*La tableau de gestion des emprunts*/
+    #loanTable{
+        border-radius: 25px;
+        border: 2px solid #bfd18e;
+        overflow: hidden;
+        table-layout: auto;
+        width: auto;
+        border-collapse: separate;
+        border-spacing: 0px;
+    }
 
-#loanTable tr:nth-child(even){
-    background-color: #b5ccab;
-}
+    td, th{
+        overflow-wrap: break-word;
+        padding: 15px 30px;
+        font-family: "Georgia", serif;
+        }
 
-#loanTable tr:nth-child(odd){
-    background-color: #d9e3d5;
-}
+    tr:first-child th:first-child {
+        border-top-left-radius: 25px;
+    }
 
-/*Le Conteneur global */
-#navbar-container {
-    position: sticky; /* Ou 'fixed' !! */
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-}
+    tr:first-child th:last-child {
+        border-top-right-radius: 25px;
+    }
 
-/*La Barre elle-même */
-#balNav {
+    tr:last-child td:first-child {
+        border-bottom-left-radius: 25px;
+    }
 
-    display: flex;
-    align-items: center; /
-    gap: 20px; /* Espace entre les liens*/
+    tr:last-child td:last-child {
 
-    /* DESIGN */
-    background-color: #b5ccab;
-    padding: 10px 20px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* ombre */
-    border-radius: 0 0 15px 15px;
+        border-bottom-right-radius: 25px ;
+    }
 
-    font-family: "Georgia", serif;
-    transition: background-color 0.3s;
-}
+    #loanTable tr:nth-child(even){
+        background-color: #b5ccab;
+    }
 
-/*Les Liens  */
-#balNav a {
-    text-decoration: none; /* Enlève le soulignement */
-    color: #2c3e50;
-    padding: 8px 15px;
-    border-radius: 10px; /* Bords ronds au survol */
-    transition: all 0.2s; /* Animation */
-}
+    #loanTable tr:nth-child(odd){
+        background-color: #d9e3d5;
+    }
 
-/* Hover */
-#balNav a:hover {
-    background-color: rgba(255, 255, 255, 0.4);
-    transform: translateY(-2px); /* Le bouton monte un tout petit peu :o/
-}
+/* La barre de navigation */
+    /*Le Conteneur global */
+    #navbar-container {
+        position: sticky; /* Ou 'fixed' !! */
+        top: 0;
+        width: 100%;
+        z-index: 1;
+    }
+
+    /*La Barre elle-même */
+    #balNav {
+        display: flex;
+        align-items: center;
+        gap: 20px; /* Espace entre les liens*/
+
+        /* DESIGN */
+        background-color: #b5ccab;
+        padding: 10px 20px;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* ombre */
+        border-radius: 0 0 15px 15px;
+
+        font-family: "Georgia", serif;
+        transition: background-color 0.3s;
+    }
+
+    /*Les Liens  */
+    #balNav a {
+        text-decoration: none; /* Enlève le soulignement */
+        color: #2c3e50;
+        padding: 8px 15px;
+        border-radius: 10px; /* Bords ronds au survol */
+        transition: all 0.2s; /* Animation */
+    }
+
+    /* Hover */
+    #balNav a:hover {
+        background-color: rgba(255, 255, 255, 0.4);
+        transform: translateY(-2px); /* Le bouton monte un tout petit peu :o */
+    }
 
 /*Le message de Bienvenue */
-#welcomeMessage {
-    margin-right: auto;
-    font-weight: bold;
-    color: #1a252f;
-}
+    #welcomeMessage {
+        margin-right: auto;
+        font-weight: bold;
+        color: #1a252f;
+    }
 
-#logoutBtn {
-    display:none;
-    margin-left:auto
+/*Les boutons*/
+    #logoutBtn {
+        display:none;
+        margin-left:auto;
+    }
 
-}
-
-#bookList {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    gap: 20px;
-}
-
-#bookList li {
-    background-color: #FFFFF0;
-    border: 1px solid #F5F5F5;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    padding: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* ombre */
-    height: 90px;
-
-}
-
-#bookList li img {
-    width: 100%;
-    height: 90px !important;
-    object-fit: cover;
-    display: block;
-}
-
-
+    #signinBtn {
+        display:none;
+        }
 
 
