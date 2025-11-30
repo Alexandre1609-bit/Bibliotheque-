@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 image.addEventListener('click', (e) => {
                     e.preventDefault();
 
-                    //des éléments de la modale
+                    //éléments de la modale
                     const modalOvrl = document.getElementById('modalOverlay');
                     const modalImg = document.getElementById("modalImage");
                     const modalTitle = document.getElementById("modalTitle");
@@ -46,9 +46,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     modalAuthor.innerText = livre.author;
                     modalStock.innerText = livre.stock;
 
+
                     //Affichage de la fenêtre
                     if (modalOvrl) {
                         modalOvrl.style.display = 'flex';
+                    }
+
+                    //Vérification du stock
+                    if (livre.stock === 0) {
+                        borrowBtn.disabled = true,
+                        borrowBtn.innerText = "Indisponible";
+                        modalStock.style.color = "red";
                     }
 
 

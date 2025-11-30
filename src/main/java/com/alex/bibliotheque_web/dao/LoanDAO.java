@@ -37,22 +37,9 @@ public class LoanDAO {
 
             PreparedStatement pStatement = connection.prepareStatement(sql);
 
-            //Rajout d'une sécurité pour la date afin d'éviter les erreurs :java.lang.NullPointerException: Cannot invoke "java.time.LocalDate.getYear()" because "date" is null/
-
-            LocalDate dateEmprunt = loan.getBorrowDate();
-            if (dateEmprunt == null) {
-                System.out.println("Attention : Date reçue nulle, utilisation de la date du jour.");
-                dateEmprunt = LocalDate.now();
-            }
-
-            LocalDate dateRetour = loan.getReturnDate();
-            if (dateRetour == null) {
-                dateRetour = dateEmprunt.plusDays(7);
-            }
-
             //On remplace les ancients statements par ceux sécurisés
-            pStatement.setDate(1, java.sql.Date.valueOf(dateEmprunt));
-            pStatement.setDate(2, java.sql.Date.valueOf(dateRetour));
+            pStatement.setDate(1, java.sql.Date.valueOf(loan.getBorrowDate()));
+            pStatement.setDate(2, java.sql.Date.valueOf(loan.getReturnDate()));
 
             pStatement.setInt(3, loan.getTheBook().getBook_id());
             pStatement.setInt(4, loan.getBorrowUser().getId());

@@ -161,4 +161,41 @@ public class BookDAO {
         }
 
     }
+
+    public Book getBookByID(Integer bookId) {
+        Book book = null;
+        try {
+            Connection connection = dataSource.getConnection();
+            String sql = "SELECT * FROM books WHERE books_id = ?";
+
+            PreparedStatement pStatement = connection.prepareStatement(sql);
+            pStatement.setInt(1, bookId);
+            ResultSet rs = pStatement.executeQuery();
+
+            while (rs.next()) {
+                book = new Book();
+
+                String titre = rs.getString("title");
+                String auteur = rs.getString("author");
+                int stock = rs.getInt("stock");
+                int id = rs.getInt("books_id");
+                String img = rs.getString("img_link");
+                String summary = rs.getString("summary");
+
+                book.setBook_id(id);
+                book.setTitle(titre);
+                book.setAuthor(auteur);
+                book.setStock(stock); //
+                book.setImg_link(img);
+                book.setSummary(summary);
+            }
+
+            pStatement.close();
+            connection.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return book;
+    }
 }
