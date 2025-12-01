@@ -1,10 +1,13 @@
+    * {
+        box-sizing: border-box;
+    }
+
 /*Page "parcourir", agit sur la liste de livre */
     #bookList {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
         list-style: none;
         padding: 0;
-        margin: 0;
         gap: 20px;
     }
 
@@ -109,15 +112,15 @@
     }
 
 /* La barre de navigation */
-    /*Le Conteneur global */
-    #navbar-container {
-        position: sticky; /* Ou 'fixed' !! */
-        top: 0;
-        width: 100%;
-        z-index: 1;
-        margin-bottom: 25px;
-    }
-
+/*Le Conteneur global */
+  #navbar-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      margin: 0;
+}
     /*La Barre elle-même */
     #balNav {
         display: flex;
@@ -196,3 +199,70 @@
          border-color: #bfd18e;
          box-shadow: 0 0 0 3px rgba(191, 209, 142, 0.5);
      }
+
+/*Réglages généraux et de l'index*/
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Arial, sans-serif;
+        padding-top: 100px;
+}
+
+    #hero-main {
+        height: calc(100vh - 50px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        padding: 20px;
+        background-color: #f7f9f7;
+    }
+
+
+    #cta-button {
+        display: inline-block;
+        background-color: #556b2f;
+        color: white;
+        font-size: 1.2em;
+        padding: 12px 25px;
+        margin-top: 30px;
+        border-radius: 8px;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+
+    #cta-button:hover {
+        background-color: #778899;
+        transform: scale(1.02);
+    }
+
+    .hero-content h1 {
+       font-size: 2.5em;
+       color: #2c3e50;
+       margin-top: 0;
+    }
+
+    h1, h2, h3, h4, p {
+        margin: 0;
+    }
+
+/*Page de connexion et d'inscription*/
+    .auth-container {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center; /* Centre verticalement */
+        align-items: center;    /* Centre horizontalement */
+        text-align: center;
+    }
+
+
+    #loginForm {
+        border: 1px solid #ccc;
+        padding: 30px;
+        border-radius: 8px;
+        background-color: #f9f9f9;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+

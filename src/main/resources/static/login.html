@@ -1,27 +1,42 @@
-<!DOCTYPE html> <html lang="fr">
+<!DOCTYPE html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion - Bibliothèque</title>
 
+    <link rel="stylesheet" href="style.css">
+
+    <script src="navbar.js" defer></script>
     <script src="auth.js" defer></script>
 </head>
 <body>
 
-<h1>Connectez-vous</h1>
+<div id="navbar-container"></div>
 
-<form id="loginForm">
+<main class="auth-container">
 
-    <label for="email">Email :</label>
-    <input type="email" id="email" required><br><br>
+    <h1>Connectez-vous</h1>
 
-    <label for="password">Mot de passe :</label>
-    <input type="password" id="password" required><br><br>
+    <form id="loginForm">
 
-    <button id="sbButton" type="submit">Se connecter</button>
-</form>
+        <label for="email">Email :</label>
+        <input type="email" id="email" required><br><br>
 
-<p id="messageErreur" style="color: red;"></p>
+        <label for="password">Mot de passe :</label>
+        <input type="password" id="password" required><br><br>
+
+        <p id="messageErreur" style="color: red;"></p>
+
+        <button id="sbButton" type="submit">Se connecter</button>
+    </form>
+
+    <hr> <p>
+    Pas encore membre ?
+    <a href="register.html">S'inscrire ici.</a>
+</p>
+
+</main>
 
 </body>
 </html>
